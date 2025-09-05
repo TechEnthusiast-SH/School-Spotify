@@ -1,1 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Spotify</title>
 
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Song List -->
+  <main>
+    <h2 style="color: white; padding: 20px;">Song List</h2>
+    <div id="song-list" class="song-list"></div>
+  </main>
+
+  <!-- Footer Audio Player -->
+  <footer class="spotify-player">
+    <div class="song-info">
+      <img src="album.jpg" alt="Album Art" class="album-art" id="album-art" />
+      <div class="details">
+        <div class="title" id="song-title">Select a song</div>
+        <div class="artist" id="song-artist">Artist</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="prev"><i class="fas fa-backward"></i></button>
+      <button id="play"><i class="fas fa-play"></i></button>
+      <button id="pause" style="display: none;"><i class="fas fa-pause"></i></button>
+      <button id="next"><i class="fas fa-forward"></i></button>
+
+      <div class="progress-wrap" id="progress-wrap">
+        <div class="progress" id="progress"></div>
+      </div>
+
+      <span class="time" id="time-display">0:00 / 0:00</span>
+    </div>
+  </footer>
+
+  <!-- Hidden Audio Element -->
+  <audio id="audio"></audio>
+
+  <!-- Script -->
+  <script>
+    // Example song data
+    const songs = [
+      {
+        title: "Devil In Disguise",
+        artist: "Marino",
+        src: "https://github.com/TechEnthusiast-SH/SchoolMusic/blob/main/Marino%20-%20Devil%20In%20Disguise%20(Official%20Lyric%20Video).mp3?raw=true",
+        cover: "https://github.com/TechEnthusiast-SH/SchoolMusic/blob/main/Icons/Devil-In-Disguise.jpeg?raw=true"
+      },
+      {
+        title: "Crush",
+        artist: "Marino",
+        src: "https://github.com/TechEnthusiast-SH/SchoolMusic/blob/main/Marino-Crush.mp3?raw=true",
+        cover: "https://github.com/TechEnthusiast-SH/SchoolMusic/blob/main/Icons/Crush-Marino-Icon.jpeg?raw=true"
+      },
+      {
+        title: "Hideaway",
+        artist: "Marino",
+        src: "https://github.com/TechEnthusiast-SH/SchoolMusic/blob/main/Marino%20-%20hideaway%20(Official%20Lyric%20Video).mp3?raw=true",
+        cover: "https://github.com/TechEnthusiast-SH/SchoolMusic/blob/main/Icons/Hideaway-MarinoIcon.jpeg?raw=true"
+      },
+      {
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },{
+        title: "Sample Song 3",
+        artist: "Artist 3",
+        src: "songs/song3.mp3",
+        cover: "covers/cover3.jpg"
+      },
+    ];
+
+    const songList = document.getElementById('song-list');
+    const audio = document.getElementById('audio');
+    const playBtn = document.getElementById('play');
+    const pauseBtn = document.getElementById('pause');
+    const progress = document.getElementById('progress');
+    const progressWrap = document.getElementById('progress-wrap');
+    const timeDisplay = document.getElementById('time-display');
+    const songTitle = document.getElementById('song-title');
+    const songArtist = document.getElementById('song-artist');
+    const albumArt = document.getElementById('album-art');
+
+    let currentSongIndex = 0;
+
+    // Generate song list dynamically
+    songs.forEach((song, index) => {
+      const item = document.createElement('div');
+      item.className = 'song-item';
+      item.innerHTML = `
+        <div class="song-meta">
+          <img src="${song.cover}" class="song-thumb" />
+          <div>
+            <div class="title">${song.title}</div>
+            <div class="artist">${song.artist}</div>
+          </div>
+        </div>
+        <button class="play-song" data-index="${index}">
+          <i class="fas fa-play"></i>
+        </button>
+      `;
+      songList.appendChild(item);
+    });
+
+    // Load song into player
+    function loadSong(index) {
+      const song = songs[index];
+      audio.src = song.src;
+      songTitle.textContent = song.title;
+      songArtist.textContent = song.artist;
+      albumArt.src = song.cover;
+      currentSongIndex = index;
+    }
+
+    // Play selected song
+    songList.addEventListener('click', (e) => {
+      if (e.target.closest('.play-song')) {
+        const index = e.target.closest('.play-song').dataset.index;
+        loadSong(index);
+        audio.play();
+        playBtn.style.display = 'none';
+        pauseBtn.style.display = 'inline-block';
+      }
+    });
+
+    // Play & Pause buttons
+    playBtn.addEventListener('click', () => {
+      audio.play();
+      playBtn.style.display = 'none';
+      pauseBtn.style.display = 'inline-block';
+    });
+
+    pauseBtn.addEventListener('click', () => {
+      audio.pause();
+      playBtn.style.display = 'inline-block';
+      pauseBtn.style.display = 'none';
+    });
+
+    // Progress bar
+    audio.addEventListener('timeupdate', () => {
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progress.style.width = percent + '%';
+
+      const formatTime = (t) => {
+        const min = Math.floor(t / 60);
+        const sec = Math.floor(t % 60).toString().padStart(2, '0');
+        return `${min}:${sec}`;
+      };
+
+      if (!isNaN(audio.duration)) {
+        timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+      }
+    });
+
+    // Seek
+    progressWrap.addEventListener('click', (e) => {
+      const width = progressWrap.clientWidth;
+      const clickX = e.offsetX;
+      const duration = audio.duration;
+
+      audio.currentTime = (clickX / width) * duration;
+    });
+
+    // Next/Previous Buttons (optional logic)
+    document.getElementById('next').addEventListener('click', () => {
+      currentSongIndex = (currentSongIndex + 1) % songs.length;
+      loadSong(currentSongIndex);
+      audio.play();
+    });
+
+    document.getElementById('prev').addEventListener('click', () => {
+      currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+      loadSong(currentSongIndex);
+      audio.play();
+    });
+  </script>
+</body>
+</html>
