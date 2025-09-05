@@ -1,1 +1,62 @@
+/* Song List Styles */
+main {
+  background-color: #181818;
+  padding-bottom: 120px; /* For footer space */
+}
 
+.song-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0 20px 20px;
+}
+
+.song-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #282828;
+  padding: 10px 15px;
+  border-radius: 6px;
+  color: white;
+  transition: background 0.2s;
+}
+
+.song-item:hover {
+  background: #333;
+}
+
+.song-meta {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.song-thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.song-item .title {
+  font-weight: bold;
+}
+
+.song-item .artist {
+  font-size: 0.85rem;
+  color: #b3b3b3;
+}
+
+.play-song {
+  background: none;
+  border: none;
+  color: #1db954;
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.play-song:hover {
+  transform: scale(1.2);
+}
