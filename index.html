@@ -103,7 +103,6 @@
       gap: 15px;
     }
 
-    /* Album art */
     .album-art {
       width: 42px;
       height: 42px;
@@ -111,7 +110,6 @@
       flex-shrink: 0;
     }
 
-    /* Song title (scroll if long) */
     .song-title {
       flex: 1;
       overflow: hidden;
@@ -130,7 +128,6 @@
       to { transform: translateX(-100%); }
     }
 
-    /* Controls */
     .controls {
       display: flex;
       gap: 12px;
@@ -184,7 +181,6 @@
       color: #1db954;
     }
 
-    /* Dropdown menu */
     .options-menu {
       position: absolute;
       bottom: 50px;
@@ -243,173 +239,11 @@
 
   <script>
     const songs = [
-      {
-        title: "Devil In Disguise",
-        artist: "Marino",
-        src: "https://github.com/TechEnthusiast-SH/SchoolMusic/blob/main/Marino%20-%20Devil%20In%20Disguise%20(Official%20Lyric%20Video).mp3?raw=true",
-        cover: "https://github.com/TechEnthusiast-SH/SchoolMusic/blob/main/Icons/Devil-In-Disguise.jpeg?raw=true"
-      },
-      {
-        title: "Crush",
-        artist: "Marino",
-        src: "https://github.com/TechEnthusiast-SH/SchoolMusic/blob/main/Marino-Crush.mp3?raw=true",
-        cover: "https://github.com/TechEnthusiast-SH/SchoolMusic/blob/main/Icons/Crush-Marino-Icon.jpeg?raw=true"
-      }{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },{
-        title: "Placeholder",
-        artist: "...",
-        src: "eee",
-        cover: "cover"
-      },
+      { title: "Devil In Disguise", artist: "Marino", src: "https://github.com/.../Devil%20In%20Disguise.mp3?raw=true", cover: "https://github.com/.../Devil-In-Disguise.jpeg?raw=true" },
+      { title: "Crush", artist: "Marino", src: "https://github.com/.../Marino-Crush.mp3?raw=true", cover: "https://github.com/.../Crush-Marino-Icon.jpeg?raw=true" },
+      { title: "Hideaway", artist: "Marino", src: "https://github.com/.../hideaway.mp3?raw=true", cover: "https://github.com/.../Hideaway-MarinoIcon.jpeg?raw=true" },
+      { title: "I'm Doing Fine", artist: "Marino", src: "https://github.com/.../ImDoingFine.mp3?raw=true", cover: "https://github.com/.../Marino-ImDoingFine.jpeg?raw=true" }
+      // Add more songs here
     ];
 
     const songList = document.getElementById('song-list');
@@ -522,12 +356,10 @@
       displaySongs(filtered);
     });
 
-    // Options dropdown toggle
     optionsBtn.addEventListener("click", () => {
       optionsMenu.style.display = optionsMenu.style.display === "flex" ? "none" : "flex";
     });
 
-    // Close dropdown when clicking outside
     document.addEventListener("click", (e) => {
       if (!optionsBtn.contains(e.target) && !optionsMenu.contains(e.target)) {
         optionsMenu.style.display = "none";
