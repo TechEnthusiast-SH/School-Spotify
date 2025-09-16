@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" href="https://github.com/TechEnthusiast-SH/SchoolMusic/blob/main/Icons/School-SpotifyLogo.png?raw=true" type="image/x-icon">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>School Spotify</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css" />
     <style>
       body {
         margin: 0;
         font-family: sans-serif;
         background: #121212;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
       }
 
+      /* Header */
       h2 {
         margin: 0;
+        padding: 20px;
       }
 
       .search-bar {
-        margin: 10px 20px;
+        margin: 0 20px 10px;
         padding: 8px;
         width: calc(100% - 40px);
         border-radius: 8px;
         border: none;
       }
 
+      /* Song list scrollable */
       .song-list {
-        padding-bottom: 120px; /* space so last songs don’t hide under player */
+        flex: 1;
+        overflow-y: auto;
+        padding-bottom: 70px; /* keep songs above player */
       }
 
       .song-item {
@@ -39,10 +43,21 @@
         align-items: center;
         padding: 10px;
         border-bottom: 1px solid #333;
-        color: white;
       }
 
-      /* --- Sticky Player --- */
+      .song-meta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .song-meta img {
+        width: 40px;
+        height: 40px;
+        border-radius: 4px;
+      }
+
+      /* --- Slim Sticky Player --- */
       .spotify-player {
         position: fixed;
         bottom: 0;
@@ -50,38 +65,38 @@
         width: 100%;
         background: #181818;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 10px 20px;
-        box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
-        color: white;
+        justify-content: space-between;
+        padding: 8px 12px;
+        border-top: 1px solid #333;
         z-index: 1000;
       }
 
-      .song-info {
-        display: flex;
-        align-items: center;
-        gap: 10px;
+      /* Song title (marquee if too long) */
+      .song-title {
+        flex: 1;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        margin-right: 10px;
       }
 
-      .album-art {
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
-        border-radius: 6px;
+      .song-title span {
+        display: inline-block;
+        padding-left: 100%;
+        animation: scroll-text 12s linear infinite;
       }
 
-      .details {
-        display: flex;
-        flex-direction: column;
+      @keyframes scroll-text {
+        from { transform: translateX(0%); }
+        to { transform: translateX(-100%); }
       }
 
+      /* Controls */
       .controls {
         display: flex;
-        align-items: center;
         gap: 15px;
-        flex: 1;
-        justify-content: center;
+        align-items: center;
       }
 
       .controls button {
@@ -92,78 +107,36 @@
         cursor: pointer;
       }
 
-      .progress-wrap {
-        position: relative;
-        width: 200px;
-        height: 5px;
-        background: #333;
-        border-radius: 5px;
-        overflow: hidden;
+      .options {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 18px;
         cursor: pointer;
-      }
-
-      .progress {
-        background: limegreen;
-        height: 100%;
-        width: 0%;
-      }
-
-      .extra-controls {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .time {
-        font-size: 12px;
-      }
-
-      #volume {
-        width: 80px;
+        margin-left: 10px;
       }
     </style>
   </head>
   <body>
-
     <!-- Header + Search -->
-    <main>
-      <h2 style="color: white; padding: 20px;">School-Spotify</h2>
-      <input type="text" id="search" class="search-bar" placeholder="Search songs...">
-      <div id="song-list" class="song-list"></div>
-    </main>
+    <h2>School-Spotify</h2>
+    <input type="text" id="search" class="search-bar" placeholder="Search songs..." />
+    <div id="song-list" class="song-list"></div>
 
-    <!-- Sticky Footer Audio Player -->
+    <!-- Slim Sticky Player -->
     <footer class="spotify-player">
-      <div class="song-info">
-        <img src="album.jpg" alt="Album Art" class="album-art" id="album-art" />
-        <div class="details">
-          <div class="title" id="song-title">Select a song</div>
-          <div class="artist" id="song-artist">Artist</div>
-        </div>
-      </div>
-
+      <div class="song-title" id="song-title"><span>Select a song</span></div>
       <div class="controls">
         <button id="prev"><i class="fas fa-backward"></i></button>
         <button id="play"><i class="fas fa-play"></i></button>
         <button id="pause" style="display: none;"><i class="fas fa-pause"></i></button>
         <button id="next"><i class="fas fa-forward"></i></button>
       </div>
-
-      <div class="extra-controls">
-        <div class="progress-wrap" id="progress-wrap">
-          <div class="progress" id="progress"></div>
-        </div>
-        <span class="time" id="time-display">0:00 / 0:00</span>
-        <button id="shuffle"><i class="fas fa-random"></i></button>
-        <button id="repeat"><i class="fas fa-redo"></i></button>
-        <input type="range" id="volume" min="0" max="1" step="0.05" value="1">
-      </div>
+      <button class="options" id="options"><i class="fas fa-ellipsis-h"></i></button>
     </footer>
 
-    <!-- Hidden Audio Element -->
     <audio id="audio"></audio>
 
-    <!-- Script (same as before, works fine with sticky footer) -->
     <script>
       const songs = [
         {
@@ -184,20 +157,10 @@
       const audio = document.getElementById('audio');
       const playBtn = document.getElementById('play');
       const pauseBtn = document.getElementById('pause');
-      const progress = document.getElementById('progress');
-      const progressWrap = document.getElementById('progress-wrap');
-      const timeDisplay = document.getElementById('time-display');
       const songTitle = document.getElementById('song-title');
-      const songArtist = document.getElementById('song-artist');
-      const albumArt = document.getElementById('album-art');
       const search = document.getElementById('search');
-      const shuffleBtn = document.getElementById('shuffle');
-      const repeatBtn = document.getElementById('repeat');
-      const volumeSlider = document.getElementById('volume');
 
       let currentSongIndex = 0;
-      let isShuffle = false;
-      let isRepeat = false;
 
       function displaySongs(list) {
         songList.innerHTML = "";
@@ -206,10 +169,10 @@
           item.className = 'song-item';
           item.innerHTML = `
             <div class="song-meta">
-              <img src="${song.cover}" class="song-thumb" style="width:40px;height:40px;border-radius:4px;"/>
+              <img src="${song.cover}" />
               <div>
-                <div class="title">${song.title}</div>
-                <div class="artist">${song.artist}</div>
+                <div>${song.title}</div>
+                <div style="font-size: 12px; color: #aaa;">${song.artist}</div>
               </div>
             </div>
             <button class="play-song" data-index="${index}">
@@ -220,17 +183,14 @@
         });
       }
 
-      displaySongs(songs);
-
       function loadSong(index) {
         const song = songs[index];
         audio.src = song.src;
-        songTitle.textContent = song.title;
-        songArtist.textContent = song.artist;
-        albumArt.src = song.cover;
+        songTitle.innerHTML = `<span>${song.title} — ${song.artist}</span>`;
         currentSongIndex = index;
       }
 
+      // Song list click
       songList.addEventListener('click', (e) => {
         if (e.target.closest('.play-song')) {
           const index = e.target.closest('.play-song').dataset.index;
@@ -253,31 +213,8 @@
         pauseBtn.style.display = 'none';
       });
 
-      audio.addEventListener('timeupdate', () => {
-        const percent = (audio.currentTime / audio.duration) * 100;
-        progress.style.width = percent + '%';
-        const formatTime = (t) => {
-          const min = Math.floor(t / 60);
-          const sec = Math.floor(t % 60).toString().padStart(2, '0');
-          return `${min}:${sec}`;
-        };
-        if (!isNaN(audio.duration)) {
-          timeDisplay.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-        }
-      });
-
-      progressWrap.addEventListener('click', (e) => {
-        const width = progressWrap.clientWidth;
-        const clickX = e.offsetX;
-        audio.currentTime = (clickX / width) * audio.duration;
-      });
-
       document.getElementById('next').addEventListener('click', () => {
-        if (isShuffle) {
-          currentSongIndex = Math.floor(Math.random() * songs.length);
-        } else {
-          currentSongIndex = (currentSongIndex + 1) % songs.length;
-        }
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
         loadSong(currentSongIndex);
         audio.play();
       });
@@ -288,29 +225,6 @@
         audio.play();
       });
 
-      shuffleBtn.addEventListener('click', () => {
-        isShuffle = !isShuffle;
-        shuffleBtn.style.color = isShuffle ? "lime" : "white";
-      });
-
-      repeatBtn.addEventListener('click', () => {
-        isRepeat = !isRepeat;
-        repeatBtn.style.color = isRepeat ? "lime" : "white";
-      });
-
-      audio.addEventListener('ended', () => {
-        if (isRepeat) {
-          audio.currentTime = 0;
-          audio.play();
-        } else {
-          document.getElementById('next').click();
-        }
-      });
-
-      volumeSlider.addEventListener('input', () => {
-        audio.volume = volumeSlider.value;
-      });
-
       search.addEventListener('input', () => {
         const query = search.value.toLowerCase();
         const filtered = songs.filter(song =>
@@ -319,6 +233,8 @@
         );
         displaySongs(filtered);
       });
+
+      displaySongs(songs);
     </script>
   </body>
 </html>
